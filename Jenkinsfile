@@ -7,12 +7,12 @@ try {
     }
     stage('Build Docker Image and Push'){
         
-        docker.withTool('docker') {
             withDockerRegistry(credentialsId: 'dockercreds', url: 'https://index.docker.io/v1/') {
-                def customImage = docker.build("yashgandam/yash-node:${env.BRANCH_NAME}${BUILD_NUMBER}")
-                customImage.push()            
-            }
-        }
+                docker.withTool('docker') {
+                    def customImage = docker.build("yashgandam/yash-node:${env.BRANCH_NAME}${BUILD_NUMBER}")
+                    customImage.push()            
+                }
+             }
     }
     
   //  stage('Deploy App'){
