@@ -9,7 +9,7 @@ try {
         
             withCredentials([usernamePassword(credentialsId: 'dockercreds', passwordVariable: 'pass', usernameVariable: 'user')]) {
                 docker.withTool('docker') {
-                    def customImage = docker.build("yashgandam/yash-node:${env.BRANCH_NAME}${BUILD_NUMBER}")
+                    def customImage = docker.build("yashgandam/yash-node:${BRANCH_NAME}${BUILD_NUMBER}")
                     sh "echo $pass | docker login --username $user --password-stdin"
                     customImage.push()            
                 }
