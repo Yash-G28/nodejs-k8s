@@ -6,7 +6,7 @@ try {
        sh "ls -ltr"
     }
     stage('Build Docker Image and Push'){
-         docker.withTools('docker'){
+         docker.withTool('docker') {
             def customImage = docker.build("yashgandam/yash-node:${env.BRANCH_NAME}${BUILD_NUMBER}")
           }
           withDockerRegistry(credentialsId: 'dockercreds', url: 'https://index.docker.io/v1/') {
